@@ -53,7 +53,7 @@ public class ImageRepository {
     public Image getImageByTitle(String id) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Image> typedQuery = em.createQuery("SELECT i from Image i where i.title =:title", Image.class).setParameter("id", Integer.valueOf(id));
+            TypedQuery<Image> typedQuery = em.createQuery("SELECT i from Image i where i.id =:id", Image.class).setParameter("id", Integer.valueOf(id));
             return typedQuery.getSingleResult();
         } catch (NoResultException nre) {
             return null;
