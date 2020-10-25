@@ -1,5 +1,6 @@
 package ImageHoster.repository;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import org.springframework.stereotype.Repository;
 
@@ -109,5 +110,22 @@ public class ImageRepository {
             transaction.rollback();
         }
     }
+    
+	// The method receives the Comment of the image to be inserted in the database
+	// Creates an instance of EntityManager
+	// Starts a transaction
+	// The transaction is committed if it is successful
+	// The transaction is rolled back in case of unsuccessful transaction
+    public void addComment (Comment c) {
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction transaction = em.getTransaction();
 
+        try {
+            transaction.begin();
+            em.persist(c);
+            transaction.commit();
+        } catch (Exception e) {
+            transaction.rollback();
+        }
+    }
 }

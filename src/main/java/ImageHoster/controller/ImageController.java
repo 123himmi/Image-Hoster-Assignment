@@ -1,5 +1,6 @@
 package ImageHoster.controller;
 
+import ImageHoster.model.Comment;
 import ImageHoster.model.Image;
 import ImageHoster.model.Tag;
 import ImageHoster.model.User;
@@ -52,6 +53,7 @@ public class ImageController {
     	Image image = imageService.getImageByTitle(id);
         model.addAttribute("image", image);
         model.addAttribute("tags", image.getTags());
+        model.addAttribute("comments", image.getComments());
         return "images/image";
     }
 
@@ -218,17 +220,20 @@ public class ImageController {
 
         return tagString.toString();
     }
-    
-    private Boolean imageOwner(Integer imageId, HttpSession session) {
-        //Get image details using image id
-        Image imgData = imageService.getImage(imageId);
-        //Get image owner id
-        Integer imgOwnerId = imgData.getUser().getId();
-        //Get currently loggedin user id
-        User currentUser = (User) session.getAttribute("loggeduser");
-        Integer currentUserId = currentUser.getId();
+    //This method will receives the comments for the image
+  // we further use this method to submit the comments to the data base 
+    @RequestMapping(value = "/image/{imageId}/{title}/comments", method = RequestMethod.POST)
+    public String postComment(@PathVariable("imageId") Integer imageId, @PathVariable("title") String title, 
+    		@RequestParam("comment") String comment, Model model, HttpSession session) {
+        Image image = imageService.getImage(imageId);
+        User user = (User) session.getAttribute("loggeduser");
 
-        return currentUserId == imgOwnerId ? true : false;
-
+        Comment cm = new Comment();
+        cm.setImage(image);
+        cm.setText(comment);
+        cm.setCreatedDate(new Date());
+        cm.setUser(user);
+        imageService.addComment(cm);
+        return "redirect:/images/" + image.getId() + "/" + image.getTitle();
     }
 }
