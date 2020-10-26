@@ -1,4 +1,4 @@
-/*
+
 package ImageHoster.controller;
 
 import ImageHoster.model.User;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(UserController.class)
+@WebMvcTest(UserControllerTest.class)
 public class UserControllerTest {
 
     protected MockHttpSession session;
@@ -81,7 +81,8 @@ public class UserControllerTest {
         user.setUsername("Abhi");
         user.setPassword("password1@");
 
-
+        Mockito.when(userService.validatePassword(user.getPassword())).thenReturn(true);
+        
         this.mockMvc.perform(post("/users/registration")
                 .flashAttr("user", user)
         )
@@ -167,4 +168,4 @@ public class UserControllerTest {
                 .andExpect(content().string(containsString("Image Hoster")));
     }
 }
-*/
+

@@ -1,6 +1,7 @@
-/*
+
 package ImageHoster.controller;
 
+import static org.junit.Assert.assertEquals;
 
 import ImageHoster.model.Image;
 import ImageHoster.model.User;
@@ -21,7 +22,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(CommentController.class)
+@WebMvcTest(CommentControllerTest.class)
 public class CommentControllerTest {
     protected MockHttpSession session;
 
@@ -65,4 +66,4 @@ public class CommentControllerTest {
                 .andExpect(redirectedUrl("/images/1/new"));
     }
 }
-*/
+
