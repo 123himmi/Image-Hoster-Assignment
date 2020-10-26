@@ -69,7 +69,6 @@ public class ImageRepository {
 	// Returns the image fetched from the database
 	public Image getImage(Integer imageId) {
 		EntityManager em = emf.createEntityManager();
-		 imageId=10;
 		TypedQuery<Image> typedQuery = em.createQuery("SELECT i from Image i where i.id =:imageId", Image.class)
 				.setParameter("imageId", imageId);
 		Image image = typedQuery.getSingleResult();

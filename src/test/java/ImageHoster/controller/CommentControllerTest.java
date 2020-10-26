@@ -1,7 +1,6 @@
 
 package ImageHoster.controller;
 
-import static org.junit.Assert.assertEquals;
 
 import ImageHoster.model.Image;
 import ImageHoster.model.User;
