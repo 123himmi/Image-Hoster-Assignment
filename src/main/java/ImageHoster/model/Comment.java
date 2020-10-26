@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
 //@Entity annotation specifies that the corresponding class is a JPA entity
 @Entity
 //@Table annotation provides more options to customize the mapping.
@@ -13,81 +12,82 @@ import java.util.List;
 @Table(name = "comment")
 public class Comment {
 
-    //@Id annotation specifies that the corresponding attribute is a primary key
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    //@Column annotation specifies that the attribute will be mapped to the column in the database.
-    //Here the column name is explicitly mentioned as 'id'
-    @Column(name = "comment_id")
-    private Integer comment_id;
+	// @Id annotation specifies that the corresponding attribute is a primary key
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	// @Column annotation specifies that the attribute will be mapped to the column
+	// in the database.
+	// Here the column name is explicitly mentioned as 'id'
+	@Column(name = "comment_id")
+	private Integer comment_id;
 
-    @Column(name = "text")
-    private String text;
+	@Column(name = "text")
+	private String text;
 
-    @Column(name = "createddate")
-    private Date createdDate;
+	@Column(name = "createddate")
+	private Date createdDate;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    //Below annotation indicates that the name of the column in 'user' table referring the primary key in 'users' table will be 'user_id'
-    @JoinColumn(name = "user_id")
-    private User user;
+	@ManyToOne(fetch = FetchType.EAGER)
+	// Below annotation indicates that the name of the column in 'user' table
+	// referring the primary key in 'users' table will be 'user_id'
+	@JoinColumn(name = "user_id")
+	private User user;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	// Below annotation indicates that the name of the column in 'images' table
+	// referring the primary key in 'image' table will be 'id'
+	@JoinColumn(name = "image_id")
+	private Image image;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    //Below annotation indicates that the name of the column in 'images' table referring the primary key in 'image' table will be 'id'
-    @JoinColumn(name = "image_id")
-    private Image image;
+	public Comment() {
+	}
 
+	public Comment(int comment_id, String text, Date createdDate, User user, Image image) {
+		this.comment_id = comment_id;
+		this.text = text;
+		this.createdDate = createdDate;
+		this.user = user;
+		this.image = image;
+	}
 
-    public Comment() {
-    }
+	public Integer getCommentId() {
+		return comment_id;
+	}
 
-    public Comment(int comment_id, String text, Date createdDate, User user, Image image) {
-        this.comment_id = comment_id;
-        this.text = text;
-        this.createdDate = createdDate;
-        this.user = user;
-        this.image = image;
-    }
+	public void setCommentId(Integer comment_id) {
+		this.comment_id = comment_id;
+	}
 
-    public Integer getCommentId() {
-        return comment_id;
-    }
+	public String getText() {
+		return text;
+	}
 
-    public void setCommentId(Integer comment_id) {
-        this.comment_id = comment_id;
-    }
+	public void setText(String text) {
+		this.text = text;
+	}
 
-    public String getText() {
-        return text;
-    }
+	public Date getCreatedDate() {
+		return createdDate;
+	}
 
-    public void setText(String text) {
-        this.text = text;
-    }
+	public void setCreatedDate(Date createdDate) {
+		this.createdDate = createdDate;
+	}
 
-    public Date getCreatedDate() {
-        return createdDate;
-    }
+	public User getUser() {
+		return user;
+	}
 
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
+	public void setUser(User user) {
+		this.user = user;
+	}
 
-    public User getUser() {
-        return user;
-    }
+	public Image getImage() {
+		return image;
+	}
 
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
-    }
+	public void setImage(Image image) {
+		this.image = image;
+	}
 
 }
